@@ -17,7 +17,7 @@ export class TypescriptStack extends cdk.Stack {
       integrationResponses: [{
         statusCode: '200',
         responseTemplates: {
-          'application/json': '{"response": "output from mock integration"}'
+          'application/json': '{"output": "response from mock integration"}'
         }
       }]
     });
