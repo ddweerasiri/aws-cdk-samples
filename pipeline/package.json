@@ -1,0 +1,38 @@
+{
+  "name": "cdk-pipeline",
+  "version": "0.0.1",
+  "bin": {
+    "pipeline": "bin/cdk-pipeline.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "cdk": "cdk",
+    "synth": "cdk synth -o build --app 'node -r ts-node/register pipeline.ts'",
+    "deploy": "cdk deploy --app 'node -r ts-node/register pipeline.ts'",
+    "diff": "cdk diff --app 'node -r ts-node/register pipeline.ts'"
+  },
+  "devDependencies": {
+    "@aws-cdk/assert": "1.69.0",
+    "@types/jest": "^26.0.10",
+    "@types/node": "10.17.27",
+    "aws-cdk": "1.69.0",
+    "constructs": "^3.1.0",
+    "jest": "^26.4.2",
+    "monocdk-experiment": "^1.51.0",
+    "ts-jest": "^26.2.0",
+    "ts-node": "^8.1.0",
+    "typescript": "~3.9.7"
+  },
+  "dependencies": {
+    "@aws-cdk/aws-codebuild": "^1.69.0",
+    "@aws-cdk/core": "1.69.0",
+    "aws-delivlib": "file:../../../Downloads/aws-delivlib",
+    "source-map-support": "^0.5.16"
+  },
+  "peerDependencies": {
+    "constructs": "^3.1.0",
+    "monocdk-experiment": "^1.60.0"
+  }
+}
