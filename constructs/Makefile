@@ -12,7 +12,7 @@ update_dependencies:
 
 	cd pipeline && ncu -a && npm i
 
-bootstrap:
+bootstrap: ## Bootstrapping
 	npm i --no-package-lock --global-style
 	npx lerna bootstrap --reject-cycles
 
