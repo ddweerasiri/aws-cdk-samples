@@ -2,12 +2,12 @@ import { expect as expectCDK, matchTemplate, MatchStyle, haveResource } from '@a
 import * as cdk from '@aws-cdk/core';
 import * as Typescript from '../lib/typescript-stack';
 
-test('Empty Stack', () => {
-    const app = new cdk.App();
-    // WHEN
-    const stack = new Typescript.TypescriptStack(app, 'MyTestStack');
-    // THEN
-    expectCDK(stack).to(haveResource('AWS::ApiGateway::Method', {
-      HttpMethod: 'GET'
-    }));
+test('Check the existance of API method', () => {
+  const app = new cdk.App();
+  // WHEN
+  const stack = new Typescript.TypescriptStack(app, 'MyTestStack');
+  // THEN
+  expectCDK(stack).to(haveResource('AWS::ApiGateway::Method', {
+    HttpMethod: 'GET'
+  }));
 });
