@@ -1,13 +1,13 @@
-import { expect as expectCDK, matchTemplate, MatchStyle } from '@aws-cdk/assert';
+import { expect as expectCDK, matchTemplate, MatchStyle, haveResource } from '@aws-cdk/assert';
 import * as cdk from '@aws-cdk/core';
-import * as Typescript from '../lib/url-shortener-stack';
+import * as URLShortenerStack from '../lib/url-shortener-stack';
 
-test('Empty Stack', () => {
-    const app = new cdk.App();
-    // WHEN
-    const stack = new Typescript.URLShortenerStack(app, 'MyTestStack');
-    // THEN
-    expectCDK(stack).to(matchTemplate({
-      "Resources": {}
-    }, MatchStyle.EXACT))
+test('Test API GET Method', () => {
+  const app = new cdk.App();
+  // WHEN
+  const stack = new URLShortenerStack.URLShortenerStack(app, 'MyTestStack');
+  // THEN
+  expectCDK(stack).to(haveResource('AWS::ApiGateway::Method', {
+    HttpMethod: 'GET'
+  }));
 });

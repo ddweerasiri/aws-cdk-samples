@@ -1,7 +1,8 @@
 {
   "packages": [
     "constructs/*",
-    "patterns/*"
+    "patterns/**",
+    "solutions/**"
   ],
   "version": "0.0.1"
 }
