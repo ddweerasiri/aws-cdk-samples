@@ -7,45 +7,42 @@ export class PipelineStack extends cdk.Stack {
   constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const github = new delivlib.GitHubRepo ({
+    const github = new delivlib.GitHubRepo({
       repository: 'ddweerasiri/aws-cdk-samples',
-      tokenSecretArn: 'arn:aws:secretsmanager:ap-southeast-2:123456789012:secret:npm-key-QtU7aC',
+      tokenSecretArn: 'arn:aws:secretsmanager:ap-southeast-2:123456789012:secret:secret1-key',
       tokenSecretOptions: {
         jsonField: 'github-key'
       }
     });
 
-    /*const pipeline = new delivlib.Pipeline(this, 'MyPipeline', {
-      // Build, Test, Lint and package your libarary here
-    });*/
-    const pipeline = new delivlib.Pipeline(this, 'GitHubPipeline', {
-      title: 'CDK Constructs',
+    /**
+     * Build and Test projects
+     */
+    const samplePipeline = new delivlib.Pipeline(this, 'GitHubConstructsPipeline', {
+      title: 'CDK Samples',
       repo: github,
       branch: 'main',
-      pipelineName: 'cdkconstructs-main',
+      pipelineName: 'cdk-samples-main',
       notificationEmail: 'ddweerasiri+cdkconstructs-main@gmail.com',
       buildSpec: codebuild.BuildSpec.fromObject({
         version: '0.2',
         phases: {
           install: {
             'commands': [
-              'npm install -g aws-cdk && cdk --version',
-              'cd ./patterns/aws-apigateway-mock/typescript' 
+              'npm install lerna -g',
+              'npm install',
+              'lerna bootstrap --reject-cycles'
             ],
-          },
-          pre_build: {
-            'commands': [
-              'npm install' 
-            ]
           },
           build: {
             'commands': [
-              'npm run build',       // Run build, tests, linter and package
+              'lerna run build --stream',
+              'lerna run test --stream'
             ],
-          },
+          }
         }
       })
-    }); 
+    });
 
     // Publish artifacts to NPM (or maven, nuget), if they don't exist already
     /*pipeline.publishToNpm({
