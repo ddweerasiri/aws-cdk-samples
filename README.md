@@ -1,2 +1,2 @@
 # aws-cdk-samples
-A collection of cdk scripts for solutions, best practices and libraries
+A collection of cdk scripts for solutions, best practices and libraries.
